@@ -16,7 +16,7 @@ gem 'omniauth-linear'
 
 ```ruby
 use OmniAuth::Builder do
-  provider :linear, ENV['LINEARAPP_CLIENT_ID'], ENV['LINEARAPP_CLIENT_SECRET']
+  provider :linear, ENV['LINEARAPP_CLIENT_ID'], ENV['LINEARAPP_CLIENT_SECRET'], { scope: 'read,issues:create' }
 end
 ```
 
@@ -26,7 +26,7 @@ In `config/initializers/linear.rb`
 
 ```ruby
   Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :linear, ENV['LINEARAPP_CLIENT_ID'], ENV['LINEARAPP_CLIENT_SECRET']
+    provider :linear, ENV['LINEARAPP_CLIENT_ID'], ENV['LINEARAPP_CLIENT_SECRET'], { scope: 'read,issues:create' }
   end
 ```
 
