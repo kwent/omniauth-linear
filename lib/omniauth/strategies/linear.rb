@@ -41,12 +41,17 @@ module OmniAuth
 
       def me
         @me ||= begin
-          client = Graphlient::Client.new(options.client_options.site,
-            headers: {
-              'Authorization' => "Bearer #{access_token.token}"
-            },
-          )
-          response = client.query <<~GRAPHQL
+          http = GraphQL::Client::HTTP.new(options.client_options.site) do |obj|
+            def headers(context)
+              {"Authorization" => "Bearer #{context[:token]}"}
+            end
+          end
+          schema = GraphQL::Client.load_schema(http)
+          client = GraphQL::Client.new(schema: schema, execute: http)
+          client.allow_dynamic_queries = true
+          client
+
+          gql = client.query <<~GRAPHQL
             query {
               viewer {
                 id
@@ -55,6 +60,7 @@ module OmniAuth
               }
             }
           GRAPHQL
+          response = client.query(gql, context: {token: access_token.token})
           response.data
         end
       end

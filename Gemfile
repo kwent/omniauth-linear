@@ -10,5 +10,5 @@ group :development, :test do
   gem 'rb-fsevent'
   gem 'growl'
   gem 'rake'
-  gem 'graphlient'
+  gem 'graphql-client'
 end
