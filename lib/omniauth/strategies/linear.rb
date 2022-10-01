@@ -50,9 +50,8 @@ module OmniAuth
           schema = GraphQL::Client.load_schema(http)
           client = GraphQL::Client.new(schema: schema, execute: http)
           client.allow_dynamic_queries = true
-          client
 
-          gql = client.query <<~GRAPHQL
+          gql = client.parse <<~GRAPHQL
             query {
               viewer {
                 id
