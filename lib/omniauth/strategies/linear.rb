@@ -1,5 +1,6 @@
 require 'omniauth-oauth2'
-require 'graphlient'
+require "graphql/client"
+require "graphql/client/http"
 
 module OmniAuth
   module Strategies
