@@ -53,6 +53,10 @@ module OmniAuth
 
           gql = client.parse <<~GRAPHQL
             query {
+              organization {
+                id
+                name
+              }
               viewer {
                 id
                 name
@@ -61,7 +65,7 @@ module OmniAuth
             }
           GRAPHQL
           response = client.query(gql, context: {token: access_token.token})
-          response.data
+          response.data.to_h
         end
       end
 
