@@ -30,7 +30,7 @@ module OmniAuth
         end
       end
 
-      uid { me.viewer.id }
+      uid { "#{me['organization'].id}-#{me['viewer'].id}" }
 
       extra do
         { raw_info: raw_info, me: me.viewer }
