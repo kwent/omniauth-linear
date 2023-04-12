@@ -33,7 +33,7 @@ module OmniAuth
       uid { "#{me['organization']['id']}-#{me['viewer']['id']}" }
 
       extra do
-        { raw_info: raw_info, me: me.viewer }
+        { raw_info: raw_info, me: me['viewer'], organization: me['organization'] }
       end
 
       def raw_info
