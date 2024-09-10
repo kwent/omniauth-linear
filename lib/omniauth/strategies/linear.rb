@@ -16,6 +16,8 @@ module OmniAuth
         grant_type: 'authorization_code',
       }
 
+      option :actor, 'user'
+
       def request_phase
         super
       end
@@ -27,6 +29,7 @@ module OmniAuth
               params[v.to_sym] = request.params[v]
             end
           end
+          params[:actor] = options[:actor]
         end
       end
 
